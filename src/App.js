@@ -6,7 +6,8 @@ class App extends Component {
   state = {
     person : [
       {name : "Prashant", age : 12}, {name : "Aishwarya", age : 20}
-    ]
+    ],
+    showPersons : false,
   };
 
   switchButtonHandler = (newName) => {
@@ -17,6 +18,13 @@ class App extends Component {
     this.setState({person : [{name : event.target.value, age : 21}, {name : "Aishwarya Harkare", age : 19}]} );
   }
 
+  togglePersons = () => {
+    const show = this.state.showPersons;
+    this.setState({
+      showPersons : !show,
+    })
+  }
+
   render() {
     const styleButton = {
       backgroundColor : 'white',
@@ -25,15 +33,23 @@ class App extends Component {
       font : 'inherit',
       cursor : 'pointer',
     };
+
+    let persons = null;
+
+    if(this.state.showPersons){
+      persons = (<div>
+      <Person name={this.state.person[0].name} age={this.state.person[0].age} click= {() => this.switchButtonHandler("Ashutosh!")} change = {this.onChangeHandler}> My hobbies : Cricket</Person>
+      <p> {this.state.person[0].name}</p>
+      <Person name={this.state.person[1].name} age={this.state.person[1].age} click= {() => this.switchButtonHandler("Ashutosh!")} change = {this.onChangeHandler}> My hobbies : Cricket</Person>
+      <p> {this.state.person[1].name}</p> 
+    </div>);
+    }
+
     return (
       <div className="App">
         <h1> My first React app </h1>
-        <Person name={this.state.person[0].name} age={this.state.person[0].age} click= {() => this.switchButtonHandler("Ashutosh!")} change = {this.onChangeHandler}> My hobbies : Cricket</Person>
-        <button style={styleButton} onClick = {this.switchButtonHandler.bind(this, "Prashant Agrawal")}>Switch</button>
-        <p> {this.state.person[0].name}</p>
-        <Person name={this.state.person[1].name} age={this.state.person[1].age} click= {() => this.switchButtonHandler("Ashutosh!")} change = {this.onChangeHandler}> My hobbies : Cricket</Person>
-        <button style={styleButton} onClick = {this.switchButtonHandler.bind(this, "Prashant Agrawal")}>Switch</button>
-        <p> {this.state.person[1].name}</p>
+        <button style={styleButton} onClick = {this.togglePersons}>Switch</button>
+        {persons}
       </div>
     );
   }
