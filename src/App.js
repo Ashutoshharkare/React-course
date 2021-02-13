@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import './Person/Person.css';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -46,11 +48,16 @@ class App extends Component {
 
   render() {
     const styleButton = {
-      backgroundColor : 'white',
+      backgroundColor : 'green',
+      color : 'white',
       padding : '8px',
       border : '1px solid blue',
       font : 'inherit',
       cursor : 'pointer',
+      ':hover' : {
+        backgroundColor : 'lightgreen',
+        color : 'black'
+      }
     };
 
     let persons = null;
@@ -64,11 +71,27 @@ class App extends Component {
           change = {(event) => this.onChangeHandler(event, personi.id)}/>})}
         </div>
       );
+
+      styleButton.backgroundColor = 'red';
+      styleButton[':hover'] = {
+          backgroundColor : 'salmon',
+          color : 'black'
+      }
+    }
+
+    let classes = [];
+    if(this.state.person.length <= 2)
+    {
+      classes.push('red');
+    }
+    if(this.state.person.length <= 1)
+    {
+      classes.push('bold');
     }
 
     return (
       <div className="App">
-        <h1> My first React app </h1>
+        <p className = {classes.join(' ')}> My first React app </p>
         <button style={styleButton} onClick = {this.togglePersons}>Switch</button>
         {persons}
       </div>
@@ -76,4 +99,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
