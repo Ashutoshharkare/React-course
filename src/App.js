@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
+//import './App.css';
 import Person from './Person/Person';
-import './Person/Person.css';
-import Radium from 'radium';
+//import './Person/Person.css';
+import styled from 'styled-components';
+
+const Button = styled.button`
+background-color : green;
+color : white;
+padding : 8px;
+border : 1px solid blue;
+font : inherit;
+cursor : pointer;
+&:hover {
+  background-color : lightgreen;
+  color : black;
+}`;
+
 
 class App extends Component {
   state = {
@@ -47,18 +60,6 @@ class App extends Component {
   }
 
   render() {
-    const styleButton = {
-      backgroundColor : 'green',
-      color : 'white',
-      padding : '8px',
-      border : '1px solid blue',
-      font : 'inherit',
-      cursor : 'pointer',
-      ':hover' : {
-        backgroundColor : 'lightgreen',
-        color : 'black'
-      }
-    };
 
     let persons = null;
 
@@ -72,11 +73,6 @@ class App extends Component {
         </div>
       );
 
-      styleButton.backgroundColor = 'red';
-      styleButton[':hover'] = {
-          backgroundColor : 'salmon',
-          color : 'black'
-      }
     }
 
     let classes = [];
@@ -92,11 +88,11 @@ class App extends Component {
     return (
       <div className="App">
         <p className = {classes.join(' ')}> My first React app </p>
-        <button style={styleButton} onClick = {this.togglePersons}>Switch</button>
+        <Button onClick = {this.togglePersons}>Show Persons</Button>
         {persons}
       </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
