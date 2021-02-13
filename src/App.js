@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
-//import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 //import './Person/Person.css';
-import styled from 'styled-components';
-
-const Button = styled.button`
-background-color : ${props => props.alt ? 'red' : 'green'};
-color : white;
-padding : 8px;
-border : 1px solid blue;
-font : inherit;
-cursor : pointer;
-&:hover {
-  background-color : ${props => props.alt ? 'salmon' : 'lightgreen'};
-  color : black;
-}`;
+//import styled from 'styled-components';
 
 
 class App extends Component {
@@ -62,6 +50,7 @@ class App extends Component {
   render() {
 
     let persons = null;
+    let btnClass = [classes.Button]
 
     if(this.state.showPersons){
       persons = (
@@ -72,23 +61,24 @@ class App extends Component {
           change = {(event) => this.onChangeHandler(event, personi.id)}/>})}
         </div>
       );
-
+      
+      btnClass.push(classes.Red);
     }
 
-    let classes = [];
+    let classesa = [];
     if(this.state.person.length <= 2)
     {
-      classes.push('red');
+      classesa.push('red');
     }
     if(this.state.person.length <= 1)
     {
-      classes.push('bold');
+      classesa.push('bold');
     }
 
     return (
       <div className="App">
-        <p className = {classes.join(' ')}> My first React app </p>
-        <Button  alt={this.state.showPersons} onClick = {this.togglePersons}>Show Persons</Button>
+        <p className = {classesa.join(' ')}> My first React app </p>
+        <button className = {btnClass.join(' ')}  alt={this.state.showPersons} onClick = {this.togglePersons}>Show Persons</button>
         {persons}
       </div>
     );

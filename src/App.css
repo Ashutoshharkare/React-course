@@ -22,6 +22,28 @@
   font-size: large;
 }
 
+.Button{
+  background-color : green;
+  color : white;
+  padding : 8px;
+  border : 1px solid blue;
+  font : inherit;
+  cursor : pointer;
+}
+
+.Button:hover {
+  background-color : lightgreen;
+  color : black;
+}
+
+.Button.Red{
+  background-color: red;
+}
+
+.Button.Red:hover{
+  background-color: salmon;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
